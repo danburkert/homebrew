@@ -113,10 +113,9 @@ class Boost < Formula
     # handling using ENV.cxx11. Using "cxxflags" and "linkflags" still works.
     if build.cxx11?
       args << "cxxflags=-std=c++11"
-      if ENV.compiler == :clang
-        args << "cxxflags=-stdlib=libc++" << "linkflags=-stdlib=libc++"
-      end
     end
+    args << "cxxflags=-stdlib=libstdc++" << "linkflags=-stdlib=libstdc++"
+    ENV.libstdcxx
 
     system "./bootstrap.sh", *bootstrap_args
     system "./b2", *args
